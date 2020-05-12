@@ -1,5 +1,6 @@
 #include<string.h>
 #include<stdlib.h>
+#include<stdio.h>
 char **cutarg(char *str,char **tofree)
 {
 	char *t=(char *)malloc((sizeof(char)+1)*strlen(str));
