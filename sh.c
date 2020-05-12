@@ -14,6 +14,11 @@ void sh(int infd,int outfd,int errfd)
 	dup2(outfd,1);
 	dup2(errfd,2);
 	p1=(char*)malloc(1024*sizeof(char));
+	if(p1==NULL)
+	{
+		perror("malloc error\n");
+		exit(0);
+	}
 	while(1)
 	{
 		cmdline();
@@ -27,7 +32,10 @@ void sh(int infd,int outfd,int errfd)
 		argv=cutarg(p1,&freep);
 		if(!(strcmp(argv[0],"cd")))
 		{
-			chdir(argv[1]);
+			if(chdir(argv[1]))
+			{
+				perror("chdir error\n");
+			}
 			continue;
 		}
 		if(!(strcmp(argv[0],"exit")))

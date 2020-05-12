@@ -3,6 +3,11 @@
 char **cutarg(char *str,char **tofree)
 {
 	char *t=(char *)malloc((sizeof(char)+1)*strlen(str));
+	if(t==NULL)
+	{
+		perror("malloc error\n");
+		exit(-1);
+	}
 	*tofree=t;
 	strcpy(t,str);
 	int i=0,j=1;
@@ -25,6 +30,11 @@ char **cutarg(char *str,char **tofree)
 		for(;t[i]==' ';i++);
 	}
 	char **p=(char **)malloc((j+1)*sizeof(char *));
+	if(p==NULL)
+	{
+		perror("malloc error\n");
+		exit(0);
+	}
 	p[j]=NULL;
 	p[0]=&t[i];
 	j=1;
